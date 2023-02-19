@@ -4,5 +4,5 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @Composable
-fun StartInfo(navController: NavHostController) {
+fun StartInfoScreen(navController: NavHostController) {
 }

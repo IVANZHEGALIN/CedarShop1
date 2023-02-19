@@ -24,7 +24,7 @@ import com.example.cedarshop.R
 
 //@Preview
 @Composable
-fun Start(navController: NavHostController) {
+fun StartScreen(navController: NavHostController) {
 
 
     Column(
@@ -43,7 +43,7 @@ fun Start(navController: NavHostController) {
                 .clip(CircleShape)
         )
         Text(
-            text = "Cedar",
+            text = "Кедар",
             style = TextStyle(
                 fontSize = 30.sp,
                 shadow = Shadow(
@@ -54,18 +54,7 @@ fun Start(navController: NavHostController) {
             ),
             fontWeight = FontWeight.Bold
         )
-        Text(
-            text = "Shop",
-            style = TextStyle(
-                fontSize = 20.sp,
-                shadow = Shadow(
-                    color = Color.Blue,
-                    offset = Offset(2.0f, 5.0f),
-                    blurRadius = 5f
-                )
-            ),
-            fontWeight = FontWeight.Bold
-        )
+
     }
 }
 

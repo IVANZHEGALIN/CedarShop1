@@ -4,5 +4,5 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @Composable
-fun Admin(navController: NavHostController) {
+fun AdminScreen(navController: NavHostController) {
 }

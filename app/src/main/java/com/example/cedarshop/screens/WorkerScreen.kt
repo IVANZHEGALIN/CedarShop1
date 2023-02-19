@@ -4,5 +4,5 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @Composable
-fun Worker(navController: NavHostController) {
+fun WorkerScreen(navController: NavHostController) {
 }
