@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.cedarshop.R
 
-
+//@Preview
 @Composable
-fun MainScreen(navHostController: NavHostController) {
+fun Start(navController: NavHostController) {
 
 
     Column(
@@ -40,15 +40,15 @@ fun MainScreen(navHostController: NavHostController) {
             painter = painterResource(id = R.drawable.cadar_logo),
             contentDescription = "Logo shop",
             modifier = Modifier
-        .clip(CircleShape)
+                .clip(CircleShape)
         )
         Text(
             text = "Cedar",
             style = TextStyle(
                 fontSize = 30.sp,
                 shadow = Shadow(
-                    color =Color.Blue,
-                    offset = Offset(2.0f,5.0f),
+                    color = Color.Blue,
+                    offset = Offset(2.0f, 5.0f),
                     blurRadius = 5f
                 )
             ),
@@ -59,8 +59,8 @@ fun MainScreen(navHostController: NavHostController) {
             style = TextStyle(
                 fontSize = 20.sp,
                 shadow = Shadow(
-                    color =Color.Blue,
-                    offset = Offset(2.0f,5.0f),
+                    color = Color.Blue,
+                    offset = Offset(2.0f, 5.0f),
                     blurRadius = 5f
                 )
             ),
@@ -68,7 +68,6 @@ fun MainScreen(navHostController: NavHostController) {
         )
     }
 }
-
 
 
 
