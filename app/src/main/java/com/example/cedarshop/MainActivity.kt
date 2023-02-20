@@ -16,6 +16,7 @@ import com.example.cedarshop.ui.theme.CedarShopTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_main)
         setContent {
             CedarShopTheme {
                 Scaffold(
