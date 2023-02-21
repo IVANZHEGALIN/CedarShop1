@@ -20,6 +20,8 @@ class Personnel(
     }
 }
 
+
+
 open class ShopAssisten(
     val id: Personnel,
     val consult: String,
@@ -49,7 +51,7 @@ class Ivan(
     }
 }
 
-class Manager {
+class Manager() {
     init {
         val managerIlya = Personnel(
         "Ilya",
@@ -58,6 +60,10 @@ class Manager {
         "top manager")
     }
 }
+ val manager = Manager()
+
+
+val ivan = Manager()
 
 
 

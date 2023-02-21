@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cedarshop.navigation.CedarNavHost
 import com.example.cedarshop.ui.theme.CedarShopTheme
+import com.example.cedarshop.ui.theme.DarkGreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                             title = {
                                 Text(text = "Мебельный магазин Кедар")
                             },
-                            backgroundColor = Color.Blue,
+                            backgroundColor = DarkGreen,
                             contentColor = Color.White,
                             elevation = 12.dp
                         )
