@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
-                                Text(text = "Мебельный магазин Кедар")
+                                Text(text = "Мебельный магазин Кедр")
                             },
                             backgroundColor = DarkGreen,
                             contentColor = Color.White,

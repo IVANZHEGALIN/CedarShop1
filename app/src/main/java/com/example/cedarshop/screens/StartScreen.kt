@@ -52,7 +52,7 @@ fun StartScreen(navController: NavHostController) {
                 .clip(CircleShape)
         )
         Text(
-        text = "Кедар",
+        text = "Кедр",
             style = TextStyle(
                 fontSize = 30.sp,
                 shadow = Shadow(
