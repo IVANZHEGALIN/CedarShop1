@@ -17,35 +17,16 @@ import com.example.cedarshop.ui.theme.DarkGreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         setContent {
             CedarShopTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = {
-                                Text(text = "Мебельный магазин Кедр")
-                            },
-                            backgroundColor = DarkGreen,
-                            contentColor = Color.White,
-                            elevation = 12.dp
-                        )
-                    },
-                    content = {
-                        Surface(
-                            modifier = Modifier.fillMaxSize(),
-                            color = MaterialTheme.colors.background
-                        )
-                        {
                             CedarNavHost()
                         }
                     }
-                )
+
 
             }
         }
-    }
-}
+
 
 
 @Preview

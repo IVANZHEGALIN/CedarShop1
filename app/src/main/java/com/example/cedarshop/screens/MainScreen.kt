@@ -20,54 +20,81 @@ import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        var textLogin by remember { mutableStateOf(TextFieldValue("")) }
 
-        OutlinedTextField(
-            value = textLogin,
-            label = { Text(text = "Логин") },
-            onValueChange = { textLogin = it }
-        )
-        var textPassword by remember { mutableStateOf(TextFieldValue("")) }
-        OutlinedTextField(
-            value = textPassword,
-            label = { Text(text = "Пароль") },
-            visualTransformation = PasswordVisualTransformation(),
-            onValueChange = { textPassword = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-        )
-        Button(
-            onClick = {
-                navController.navigate(route = NavRoute.Worker.route)
-                      /* Нужно задать условие , что бы направить на
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 15.dp),
+                        horizontalArrangement = Arrangement.Center
+                    )
+
+                    {
+                        Text(
+                            text = "Вход в аккаунт",
+                        )
+                    }
+                },
+                backgroundColor = DarkGreen,
+                contentColor = Color.White,
+                elevation = 12.dp
+            )
+        },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                var textLogin by remember { mutableStateOf(TextFieldValue("")) }
+
+                OutlinedTextField(
+                    value = textLogin,
+                    label = { Text(text = "Логин") },
+                    onValueChange = { textLogin = it }
+                )
+                var textPassword by remember { mutableStateOf(TextFieldValue("")) }
+                OutlinedTextField(
+                    value = textPassword,
+                    label = { Text(text = "Пароль") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    onValueChange = { textPassword = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                )
+                Button(
+                    onClick = {
+                        navController.navigate(route = NavRoute.Worker.route)
+                        /* Нужно задать условие , что бы направить на
                       Админа или Рабочего
                       */
 
-            },
-            modifier =
-            Modifier
-                .width(100.dp)
-                .padding(bottom = 25.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = DarkGreen,
-                contentColor = Color.White
-            )
-        ) {
-            Text(text = "Войти")
+                    },
+                    modifier =
+                    Modifier
+                        .width(100.dp)
+                        .padding(bottom = 25.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = DarkGreen,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(text = "Войти")
+
+                }
+            }
 
         }
-    }
+    )
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun prevMaiboScreen() {
+fun prevMainScreen() {
     CedarShopTheme() {
         MainScreen(navController = rememberNavController())
     }
