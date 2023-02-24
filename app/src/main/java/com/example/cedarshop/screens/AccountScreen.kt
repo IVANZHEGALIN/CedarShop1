@@ -2,6 +2,7 @@ package com.example.cedarshop.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,34 +49,23 @@ fun AccountScreen(navController: NavHostController) {
         },
 
 
-
-
         content = {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.anton_manager),
-                    contentDescription = "Фото сотрудника"
-                )
-
-                Button(onClick = { /*TODO*/ })
-                {
-                    Text(text = "Загрузить фото")
-                }
+                ImageWorker()
+                ButtonDownloadPhoto()
                 TextFieldFirstName()
                 TextFieldName()
                 TextFieldPosition()
                 TextFieldNumber()
             }
         },
-
         bottomBar = {
             BottomNavigation(
                 backgroundColor = DarkGreen
-                //modifier = Modifier.fillMaxSize()
             )
             {
                 IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route) }
@@ -100,6 +91,28 @@ fun prevAccountScreen() {
         AccountScreen(navController = rememberNavController())
     }
 }
+//TOPBAR
+
+
+
+// CONTENT
+@Preview(showBackground = true)
+@Composable
+fun ImageWorker() {
+    Image(
+        painter = painterResource(id = R.drawable.anton_manager),
+        contentDescription = "Фото сотрудника"
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonDownloadPhoto() {
+    Button(onClick = { /*TODO*/ })
+    {
+        Text(text = "Загрузить фото")
+    }
+}
 
 
 @Preview(showBackground = true)
@@ -108,6 +121,7 @@ fun TextFieldFirstName() {
     var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
 
     OutlinedTextField(
+        modifier = Modifier.padding(top = 25.dp),
         value = textFirstName,
         onValueChange = { textFirstName = it },
         label = { Text(text = "Фамилия") }
@@ -148,7 +162,8 @@ fun TextFieldNumber() {
     OutlinedTextField(
         value = textNumber,
         label = { Text(text = "Номер") },
-        onValueChange = { textNumber = it }
+        onValueChange = { textNumber = it },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 }
 

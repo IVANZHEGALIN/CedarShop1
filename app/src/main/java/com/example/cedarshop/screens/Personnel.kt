@@ -15,7 +15,8 @@ class Personnel(
     val age: Int,
     val number: Long,
     val position: String
-) {
+)
+{
     fun work() {
     }
 }
@@ -65,6 +66,17 @@ class Manager() {
 
 val ivan = Manager()
 
+
+
+
+class Worker(
+    var age: Int,
+    private var moneylaundering : String,
+    var salary: Int
+)
+{
+ fun cry() = "Все заебло"
+}
 
 
 

@@ -1,16 +1,16 @@
 package com.example.cedarshop.screens
 
 
-
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -22,25 +22,56 @@ import com.example.cedarshop.ui.theme.DarkGreen
 @Composable
 fun TaskScreen(navController: NavHostController) {
     Scaffold(
+        topBar = {
+            BottomNavigation(backgroundColor = DarkGreen)
+            {
+                IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route) }
+
+                )
+                { Icon(Icons.Filled.ArrowBack, contentDescription = "Home") }
+            }
+            TopAppBar(
+                title = {
+                    Row(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 15.dp),
+                        horizontalArrangement = Arrangement.Center
+                    )
+
+                    {
+                        Text(
+                            text = "Задачи",
+                        )
+                    }
+                },
+                backgroundColor = DarkGreen,
+                contentColor = Color.White,
+                elevation = 12.dp
+            )
+        },
+
+        content = {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            )
+            {
+
+            }
+        },
         bottomBar = {
             BottomNavigation(backgroundColor = DarkGreen)
             {
-                IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route)}
+                IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route) }
 
                 )
-                { Icon(Icons.Filled.Home,contentDescription = "Home")}
-
-
+                { Icon(Icons.Filled.Home, contentDescription = "Home") }
             }
         }
     )
-    {
-
-    }
 }
-
-
-
 
 
 @Preview(showBackground = true)
@@ -52,25 +83,18 @@ fun prevTaskScreen() {
 }
 
 
+@Preview(showBackground = true)
+@Composable
+fun Image() {
+    IconButton(onClick = { /*TODO*/ })
+
+    { Icon(Icons.Filled.Build, contentDescription = "Home") }
+}
 
 
 
 
 
 
-//Scaffold(
-//                    topBar = {
-//                        TopAppBar(
-//                            title = {
-//                                Text(text = "Мебельный магазин Кедр")
-//                            },
-//                            backgroundColor = DarkGreen,
-//                            contentColor = Color.White,
-//                            elevation = 12.dp
-//                        )
-//                    },
-//                    content = {
-//                        Surface(
-//                            modifier = Modifier.fillMaxSize(),
-//                            color = MaterialTheme.colors.background
-//                        )
+
+
