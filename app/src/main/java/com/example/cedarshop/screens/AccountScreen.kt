@@ -1,17 +1,22 @@
 package com.example.cedarshop.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.cedarshop.R
 import com.example.cedarshop.navigation.NavRoute
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
@@ -40,11 +45,32 @@ fun AccountScreen(navController: NavHostController) {
                 elevation = 12.dp
             )
         },
-        content = {
-            Column() {
 
+
+
+
+        content = {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.anton_manager),
+                    contentDescription = "Фото сотрудника"
+                )
+
+                Button(onClick = { /*TODO*/ })
+                {
+                    Text(text = "Загрузить фото")
+                }
+                TextFieldFirstName()
+                TextFieldName()
+                TextFieldPosition()
+                TextFieldNumber()
             }
         },
+
         bottomBar = {
             BottomNavigation(
                 backgroundColor = DarkGreen
@@ -67,7 +93,6 @@ fun AccountScreen(navController: NavHostController) {
 
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun prevAccountScreen() {
@@ -75,3 +100,65 @@ fun prevAccountScreen() {
         AccountScreen(navController = rememberNavController())
     }
 }
+
+
+@Preview(showBackground = true)
+@Composable
+fun TextFieldFirstName() {
+    var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
+
+    OutlinedTextField(
+        value = textFirstName,
+        onValueChange = { textFirstName = it },
+        label = { Text(text = "Фамилия") }
+
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextFieldName() {
+    var textName by remember { mutableStateOf(TextFieldValue("")) }
+
+    OutlinedTextField(
+        value = textName,
+        label = { Text(text = "Имя") },
+        onValueChange = { textName = it }
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun TextFieldPosition() {
+    var textPosition by remember { mutableStateOf(TextFieldValue("")) }
+
+    OutlinedTextField(
+        value = textPosition,
+        label = { Text(text = "Должность") },
+        onValueChange = { textPosition = it }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextFieldNumber() {
+    var textNumber by remember { mutableStateOf(TextFieldValue("")) }
+
+    OutlinedTextField(
+        value = textNumber,
+        label = { Text(text = "Номер") },
+        onValueChange = { textNumber = it }
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
