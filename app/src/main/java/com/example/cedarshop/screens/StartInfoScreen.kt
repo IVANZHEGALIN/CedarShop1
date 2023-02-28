@@ -90,7 +90,7 @@ fun StartInfoScreen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun prevStartInfoScreen() {
+fun PrevStartInfoScreen() {
     CedarShopTheme() {
         StartInfoScreen(navController = rememberNavController())
     }

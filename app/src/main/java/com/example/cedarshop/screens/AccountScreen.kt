@@ -2,7 +2,6 @@ package com.example.cedarshop.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -11,11 +10,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.R
@@ -56,11 +57,7 @@ fun AccountScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 ImageWorker()
-                ButtonDownloadPhoto()
-                TextFieldFirstName()
-                TextFieldName()
-                TextFieldPosition()
-                TextFieldNumber()
+                TextCardID()
             }
         },
         bottomBar = {
@@ -71,11 +68,13 @@ fun AccountScreen(navController: NavHostController) {
                 IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route) }
 
                 )
-                { Icon(Icons.Filled.Home, contentDescription = "Home") }
-                IconButton(onClick = { navController.navigate(route = NavRoute.Account.route) } // при нажатии на икнку , должно открыться поля для редактирования аккаунта
+                { Icon(Icons.Filled.Home, contentDescription = "Домой") }
+
+
+                IconButton(onClick = { navController.navigate(route = NavRoute.AccountSettings.route) } // при нажатии на икнку , должно открыться поля для редактирования аккаунта
 
                 )
-                { Icon(Icons.Filled.Settings, contentDescription = "Setting") }
+                { Icon(Icons.Filled.Settings, contentDescription = "Настройки") }
 
 
             }
@@ -86,12 +85,11 @@ fun AccountScreen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun prevAccountScreen() {
+fun PrevAccountScreen() {
     CedarShopTheme() {
         AccountScreen(navController = rememberNavController())
     }
 }
-//TOPBAR
 
 
 
@@ -99,73 +97,53 @@ fun prevAccountScreen() {
 @Preview(showBackground = true)
 @Composable
 fun ImageWorker() {
-    Image(
-        painter = painterResource(id = R.drawable.anton_manager),
-        contentDescription = "Фото сотрудника"
-    )
-}
+
+        Image(
+            contentScale = ContentScale.Fit,
+            painter = painterResource(id = R.drawable.anton_manager),
+            contentDescription = "Фото сотрудника"
+        )
+    }
+
 
 @Preview(showBackground = true)
 @Composable
-fun ButtonDownloadPhoto() {
-    Button(onClick = { /*TODO*/ })
-    {
-        Text(text = "Загрузить фото")
+fun TextCardID() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 25.dp, start = 150.dp),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Фамилия",
+            fontSize = 15.sp,
+            fontFamily = FontFamily.Serif
+        )
+        Text(
+            text = "Имя",
+            fontSize =15.sp,
+            fontFamily = FontFamily.Serif,
+            modifier = Modifier.padding(top = 5.dp)
+        )
+        Text(
+            text = "Должность",
+            fontSize = 15.sp,
+            fontFamily = FontFamily.Serif,
+            modifier = Modifier.padding(top = 5.dp)
+        )
+        Text(
+            text = "Номер",
+            fontSize = 15.sp,
+            fontFamily = FontFamily.Serif,
+            modifier = Modifier.padding(top = 5.dp)
+        )
     }
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun TextFieldFirstName() {
-    var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
 
-    OutlinedTextField(
-        modifier = Modifier.padding(top = 25.dp),
-        value = textFirstName,
-        onValueChange = { textFirstName = it },
-        label = { Text(text = "Фамилия") }
-
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TextFieldName() {
-    var textName by remember { mutableStateOf(TextFieldValue("")) }
-
-    OutlinedTextField(
-        value = textName,
-        label = { Text(text = "Имя") },
-        onValueChange = { textName = it }
-    )
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun TextFieldPosition() {
-    var textPosition by remember { mutableStateOf(TextFieldValue("")) }
-
-    OutlinedTextField(
-        value = textPosition,
-        label = { Text(text = "Должность") },
-        onValueChange = { textPosition = it }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TextFieldNumber() {
-    var textNumber by remember { mutableStateOf(TextFieldValue("")) }
-
-    OutlinedTextField(
-        value = textNumber,
-        label = { Text(text = "Номер") },
-        onValueChange = { textNumber = it },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-    )
-}
 
 
 

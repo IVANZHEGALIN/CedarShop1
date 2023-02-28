@@ -34,7 +34,7 @@ fun WorkerScreen(navController: NavHostController) {
 
                     {
                         Text(
-                            text = "Задачи",
+                            text = "Текущие задачи",
                         )
                     }
                 },
