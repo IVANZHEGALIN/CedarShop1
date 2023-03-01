@@ -1,18 +1,21 @@
 package com.example.cedarshop.screens
 
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
@@ -21,29 +24,16 @@ import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
 fun TaskScreen(navController: NavHostController) {
+
     Scaffold(
         topBar = {
-            BottomNavigation(backgroundColor = DarkGreen)
-            {
-                IconButton(onClick = { navController.navigate(route = NavRoute.Worker.route) }
-
-                )
-                { Icon(Icons.Filled.ArrowBack, contentDescription = "Home") }
-            }
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
+                    Text(
+                        text = "Задачи",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
                     )
-
-                    {
-                        Text(
-                            text = "Задачи",
-                        )
-                    }
                 },
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
@@ -51,14 +41,31 @@ fun TaskScreen(navController: NavHostController) {
             )
         },
 
-        content = {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            )
-            {
 
+        content = {
+            Column()
+            {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(5f),
+                    contentAlignment = Alignment.Center
+                )
+                {
+                    Text(
+                        text = "Написанное ТЗ",
+                        fontSize = 22.sp
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(2f),
+                    contentAlignment = Alignment.Center
+                )
+                {
+                    ButtonDelay()  // при нажатии кнопки отложить, меняется цвет на основном экране в карте задачи
+                }
             }
         },
         bottomBar = {
@@ -85,10 +92,14 @@ fun prevTaskScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun Image() {
-    IconButton(onClick = { /*TODO*/ })
-
-    { Icon(Icons.Filled.Build, contentDescription = "Home") }
+fun ButtonDelay() {
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier.padding(top = 5.dp)
+    )
+    {
+        Text(text = "Отложить задачу")
+    }
 }
 
 
