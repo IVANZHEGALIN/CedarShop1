@@ -2,6 +2,7 @@ package com.example.cedarshop.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,7 +20,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.R
 import com.example.cedarshop.navigation.NavRoute
-import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
@@ -47,15 +47,17 @@ fun AddNewWorkerScreen(navController: NavHostController) {
             )
         },
         content = {
-            Column(
+            LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                PhotoNewWorker()
-                ButtonDownloadPhotoNewWorker()
-                TextFieldCardIDNewWorker()
-                ButtonSaveSettingNewWorker()
+                item() {
+                    PhotoNewWorker()
+                    ButtonDownloadPhotoNewWorker()
+                    TextFieldCardIDNewWorker()
+                    ButtonSaveSettingNewWorker()
+                }
             }
         },
         bottomBar = {
@@ -63,24 +65,20 @@ fun AddNewWorkerScreen(navController: NavHostController) {
                 backgroundColor = DarkGreen
             )
             {
-                IconButton(onClick = { navController.navigate(route = NavRoute.Account.route) }
+                IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }
 
                 )
                 { Icon(Icons.Filled.Home, contentDescription = "Home") }
-
             }
         }
     )
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun prevAddNewWorkerScreen() {
-        AddNewWorkerScreen(navController = rememberNavController())
-    }
-
-
+    AddNewWorkerScreen(navController = rememberNavController())
+}
 
 
 @Preview(showBackground = true)
@@ -96,8 +94,10 @@ fun PhotoNewWorker() {
 @Preview(showBackground = true)
 @Composable
 fun ButtonDownloadPhotoNewWorker() {
-    Button(onClick = { /*TODO*/ },
-        modifier = Modifier.padding(top= 5.dp))
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier.padding(top = 5.dp)
+    )
     {
         Text(text = "Загрузить фото")
     }
@@ -114,7 +114,6 @@ fun TextFieldCardIDNewWorker() {
     var textLogin by remember { mutableStateOf(TextFieldValue("")) }
     var textPassword by remember { mutableStateOf(TextFieldValue("")) }
     Column {
-
 
         OutlinedTextField(
             modifier = Modifier.padding(top = 5.dp),
@@ -142,7 +141,7 @@ fun TextFieldCardIDNewWorker() {
         OutlinedTextField(
             value = textLogin,
             label = { Text(text = "Логин") },
-            onValueChange = { textLogin= it },
+            onValueChange = { textLogin = it },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         OutlinedTextField(
@@ -151,17 +150,20 @@ fun TextFieldCardIDNewWorker() {
             onValueChange = { textPassword = it },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun ButtonSaveSettingNewWorker() {
-    Button(onClick = { /*TODO*/ },
-        modifier = Modifier.padding(top= 5.dp))
-
-    {
-        Text(text = "Сохранить")
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier.padding(top = 5.dp)
+        )
+        {
+            Text(text = "Сохранить")
+        }
     }
 }
 

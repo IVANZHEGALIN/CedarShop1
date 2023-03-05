@@ -70,15 +70,17 @@ fun AdminScreen(navController: NavHostController) {
             )
         },
         bottomBar = {
-            BottomAppBar(backgroundColor = DarkGreen)
-            {
+            BottomAppBar(backgroundColor = DarkGreen){
+
+            }
+           /* {
                 IconButton(onClick = {navController.navigate(route = NavRoute.Account.route)}) {
                     Icon(
                         Icons.Filled.AccountBox,
                         contentDescription = "Аккаунт"
                     )
                 }
-            }
+            }*/
         }
     )
     {
