@@ -67,7 +67,7 @@ fun MainScreen(navController: NavHostController) {
                 )
                 Button(
                     onClick = {
-                        navController.navigate(route = NavRoute.Worker.route)
+                        navController.navigate(route = NavRoute.Admin.route)
                         /* Нужно задать условие , что бы направить на
                       Админа или Рабочего
                       */
