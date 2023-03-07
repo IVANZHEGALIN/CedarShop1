@@ -1,9 +1,11 @@
 package com.example.cedarshop.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -47,18 +49,28 @@ fun AddNewWorkerScreen(navController: NavHostController) {
             )
         },
         content = {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
-            ) {
-                item() {
+            )
+            {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .fillMaxSize()
+                        .padding(top =30.dp, bottom = 60.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
                     PhotoNewWorker()
                     ButtonDownloadPhotoNewWorker()
-                    TextFieldCardIDNewWorker()
+                    TextFieldCardNewWorker()
                     ButtonSaveSettingNewWorker()
                 }
             }
+
         },
         bottomBar = {
             BottomNavigation(
@@ -66,7 +78,6 @@ fun AddNewWorkerScreen(navController: NavHostController) {
             )
             {
                 IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }
-
                 )
                 { Icon(Icons.Filled.Home, contentDescription = "Home") }
             }
@@ -106,7 +117,7 @@ fun ButtonDownloadPhotoNewWorker() {
 
 @Preview(showBackground = true)
 @Composable
-fun TextFieldCardIDNewWorker() {
+fun TextFieldCardNewWorker() {
     var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
     var textName by remember { mutableStateOf(TextFieldValue("")) }
     var textPosition by remember { mutableStateOf(TextFieldValue("")) }

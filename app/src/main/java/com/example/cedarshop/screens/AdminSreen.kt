@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -73,14 +74,14 @@ fun AdminScreen(navController: NavHostController) {
             BottomAppBar(backgroundColor = DarkGreen){
 
             }
-           /* {
-                IconButton(onClick = {navController.navigate(route = NavRoute.Account.route)}) {
+
+                IconButton(onClick = {navController.navigate(route = NavRoute.Admin.route)}) {
                     Icon(
                         Icons.Filled.AccountBox,
                         contentDescription = "Аккаунт"
                     )
                 }
-            }*/
+
         }
     )
     {
@@ -119,6 +120,7 @@ fun WorkerItem(title: String, subtitle: String, navController: NavHostController
                     .size(70.dp)
                     .clip(CircleShape)
             )
+
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
@@ -131,6 +133,13 @@ fun WorkerItem(title: String, subtitle: String, navController: NavHostController
                     fontSize = 16.sp
                 )
 
+                }
+            Spacer(modifier = Modifier.weight(1f,true))
+            IconButton(onClick = { navController.navigate(route = NavRoute.AddNewWorker.route) }) {
+                Icon(
+                    Icons.Filled.Settings,
+                    contentDescription = "Аккаунт"
+                )
             }
         }
     }
