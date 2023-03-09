@@ -109,7 +109,7 @@ fun WorkerItem(title: String, subtitle: String, navController: NavHostController
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
-            .clickable { },
+            .clickable { navController.navigate(route = NavRoute.ControlWorkerTask.route)},
         elevation = 6.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

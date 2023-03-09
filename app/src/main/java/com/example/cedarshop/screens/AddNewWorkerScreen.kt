@@ -87,7 +87,7 @@ fun AddNewWorkerScreen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun prevAddNewWorkerScreen() {
+fun PrevAddNewWorkerScreen() {
     AddNewWorkerScreen(navController = rememberNavController())
 }
 

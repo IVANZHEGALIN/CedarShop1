@@ -10,7 +10,7 @@ sealed class NavRoute(val route: String) {
     object StartInfo : NavRoute("start_info_screen")
     object Main : NavRoute("main_screen")
     object Admin : NavRoute("admin_screen")
-    object AdminTaskStatus: NavRoute("admin_task_status_screen")
+    object ControlWorkerTask: NavRoute("control_worker_task_screen")
     object AddNewWorker : NavRoute("add_naw_worker_screen")
     object AddNewTaskWorker : NavRoute("add_new_task_worker_screen")
     object Worker : NavRoute("worker_screen")
@@ -28,7 +28,7 @@ fun CedarNavHost() {
         composable(NavRoute.StartInfo.route) { StartInfoScreen(navController = navController) }
         composable(NavRoute.Main.route) { MainScreen(navController = navController) }
         composable(NavRoute.Admin.route) { AdminScreen(navController = navController) }
-        composable(NavRoute.AdminTaskStatus.route) { AdminTaskStatusScreen(navController = navController) }
+        composable(NavRoute.ControlWorkerTask.route) { ControlWorkerTaskScreen(navController = navController) }
         composable(NavRoute.AddNewWorker.route) { AddNewWorkerScreen(navController = navController) }
         composable(NavRoute.AddNewTaskWorker.route) { AddNewTaskWorkerScreen(navController = navController) }
         composable(NavRoute.Worker.route) { WorkerScreen(navController = navController) }
