@@ -51,7 +51,7 @@ fun ControlWorkerTaskScreen(navController: NavHostController) {
                 content = {
                     Icon(Icons.Filled.Add, contentDescription = "Добавить")
                 },
-                onClick = { },
+                onClick = { navController.navigate(route = NavRoute.AddNewTaskWorker.route)},
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
             )
@@ -90,7 +90,7 @@ fun StatusTaskItem(title: String, subtitle: String, navController: NavHostContro
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
-            .clickable { navController.navigate(route = NavRoute.AddNewTaskWorker.route) },
+            .clickable { navController.navigate(route = NavRoute.Task.route) },
         elevation = 6.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
