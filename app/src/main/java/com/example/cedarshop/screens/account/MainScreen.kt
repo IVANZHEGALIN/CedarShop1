@@ -12,15 +12,19 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
+import com.example.cedarshop.screens.account.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
+val viewModel: AccountViewModel by viewModel()
+
 @Composable
 fun MainScreen(navController: NavHostController) {
-
+    val loginPasswordState by viewModel.loginPasswordState.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -55,7 +59,9 @@ fun MainScreen(navController: NavHostController) {
                 OutlinedTextField(
                     value = textLogin,
                     label = { Text(text = "Логин") },
-                    onValueChange = { textLogin = it }
+                    onValueChange = { value ->
+                        textLogin = value
+                    viewModel.loginPasswordState(value)}
                 )
                 var textPassword by remember { mutableStateOf(TextFieldValue("")) }
                 OutlinedTextField(
