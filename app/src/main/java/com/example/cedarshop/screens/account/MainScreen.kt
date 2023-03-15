@@ -20,11 +20,16 @@ import com.example.cedarshop.screens.account.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
-val viewModel: AccountViewModel by viewModel()
+
 
 @Composable
-fun MainScreen(navController: NavHostController) {
-    val loginPasswordState by viewModel.loginPasswordState.collectAsStateWithLifecycle()
+fun MainScreen(navController: NavHostController, viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+    val loginPasswordState by viewModel.loginPasswordState.collectAsState()
+    if (loginPasswordState.hasLoginError)
+    {
+        val T =0
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -54,26 +59,29 @@ fun MainScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                var textLogin by remember { mutableStateOf(TextFieldValue("")) }
 
+                var textLogin by remember { mutableStateOf(TextFieldValue("")) }
                 OutlinedTextField(
                     value = textLogin,
                     label = { Text(text = "Логин") },
                     onValueChange = { value ->
                         textLogin = value
-                    viewModel.loginPasswordState(value)}
+                    viewModel.onTextLogin(value.text)}
+
                 )
                 var textPassword by remember { mutableStateOf(TextFieldValue("")) }
                 OutlinedTextField(
                     value = textPassword,
                     label = { Text(text = "Пароль") },
                     visualTransformation = PasswordVisualTransformation(),
-                    onValueChange = { textPassword = it },
+                    onValueChange = { value ->
+                        textPassword = value
+                        viewModel.onTextPassword(value.text)},
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
                 Button(
-                    onClick = {
-                        navController.navigate(route = NavRoute.Admin.route)
+                    onClick = {viewModel.Click()
+                       // navController.navigate(route = NavRoute.Admin.route)
                         /* Нужно задать условие , что бы направить на
                       Админа или Рабочего
                       */
@@ -102,6 +110,6 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun prevMainScreen() {
     CedarShopTheme() {
-        MainScreen(navController = rememberNavController())
+        MainScreen(navController = rememberNavController(), AccountViewModel())
     }
 }
