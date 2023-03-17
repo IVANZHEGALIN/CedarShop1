@@ -1,5 +1,6 @@
 package com.example.cedarshop.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -12,23 +13,22 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.cedarshop.navigation.NavRoute
 import com.example.cedarshop.screens.account.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 
-
 @Composable
-fun MainScreen(navController: NavHostController, viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun MainScreen(
+    navController: NavHostController,
+    viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+
+    ) {
     val loginPasswordState by viewModel.loginPasswordState.collectAsState()
-    if (loginPasswordState.hasLoginError)
-    {
-        val T =0
-    }
+
+
 
     Scaffold(
         topBar = {
@@ -66,9 +66,12 @@ fun MainScreen(navController: NavHostController, viewModel: AccountViewModel = a
                     label = { Text(text = "Логин") },
                     onValueChange = { value ->
                         textLogin = value
-                    viewModel.onTextLogin(value.text)}
+                        viewModel.onTextLogin(value.text)
 
+                    },
                 )
+
+
                 var textPassword by remember { mutableStateOf(TextFieldValue("")) }
                 OutlinedTextField(
                     value = textPassword,
@@ -76,12 +79,14 @@ fun MainScreen(navController: NavHostController, viewModel: AccountViewModel = a
                     visualTransformation = PasswordVisualTransformation(),
                     onValueChange = { value ->
                         textPassword = value
-                        viewModel.onTextPassword(value.text)},
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                )
+                        viewModel.onTextPassword(value.text)
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    )
                 Button(
-                    onClick = {viewModel.Click()
-                       // navController.navigate(route = NavRoute.Admin.route)
+                    onClick = {
+                        viewModel.Click()
+                        // navController.navigate(route = NavRoute.Admin.route)
                         /* Нужно задать условие , что бы направить на
                       Админа или Рабочего
                       */

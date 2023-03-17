@@ -15,7 +15,22 @@ class Jackets(
         }
     }
 }
+// if (loginPasswordState.hasLoginError) {
+//    val T = 0
+//}
 
 
-
+/*  if (textLogin.text.isEmpty()) {
+                            Toast.makeText(
+                                this,
+                                "Введите логин",
+                                1
+                            ).show()
+                        } else if (textPassword.text.isEmpty()) {
+                            Toast.makeText(
+                                this,
+                                "Введите  пароль",
+                                1
+                            ).show()
+                        }*/
 
