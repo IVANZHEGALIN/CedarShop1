@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.cedarshop.navigation.NavRoute
 import com.example.cedarshop.screens.account.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
@@ -67,7 +68,9 @@ fun MainScreen(
                     onValueChange = { value ->
                         textLogin = value
                         viewModel.onTextLogin(value.text)
+                        while (loginPasswordState.hasLoginError) {
 
+                        }
                     },
                 )
 
@@ -80,6 +83,7 @@ fun MainScreen(
                     onValueChange = { value ->
                         textPassword = value
                         viewModel.onTextPassword(value.text)
+
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     )
