@@ -24,17 +24,20 @@ class AccountViewModel : ViewModel() {
     }
 
 
-    fun Click() {
+    fun Click(): Boolean {
         if (login != mutableLoginListState.value.login ) {
             mutableLoginListState.update { state-> state.copy(hasLoginError = true) }
-            return
+            return false
         }
         if (password != mutableLoginListState.value.password) {
             mutableLoginListState.update { state-> state.copy(hasPasswordError = true)}
-            return
+            return false
         }
         val T = 0
+        return true
+
     }
+
 
 
     val login = "123"

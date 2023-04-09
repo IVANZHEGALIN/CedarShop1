@@ -1,6 +1,5 @@
 package com.example.cedarshop.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -25,7 +24,6 @@ import com.example.cedarshop.ui.theme.DarkGreen
 fun MainScreen(
     navController: NavHostController,
     viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-
     ) {
     val loginPasswordState by viewModel.loginPasswordState.collectAsState()
 
@@ -68,9 +66,9 @@ fun MainScreen(
                     onValueChange = { value ->
                         textLogin = value
                         viewModel.onTextLogin(value.text)
-                        while (loginPasswordState.hasLoginError) {
+                       // while (loginPasswordState.hasLoginError) {
 
-                        }
+                       // }
                     },
                 )
 
@@ -83,35 +81,46 @@ fun MainScreen(
                     onValueChange = { value ->
                         textPassword = value
                         viewModel.onTextPassword(value.text)
-
                     },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    )
-                Button(
-                    onClick = {
-                        viewModel.Click()
-                        // navController.navigate(route = NavRoute.Admin.route)
-                        /* Нужно задать условие , что бы направить на
-                      Админа или Рабочего
-                      */
+                    //singleLine = true,
+                    //isError = loginError,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    // if (loginError) {
+                    // Text(text = "Неверный логин",
+                    // color = MaterialTheme.colors.error,
+                    //    style = MaterialTheme.shapes.medium,
+                    //    modifier = Modifier.padding(start = 16.dp)
 
-                    },
-                    modifier =
-                    Modifier
-                        .width(100.dp)
-                        .padding(bottom = 25.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = DarkGreen,
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text(text = "Войти")
-
-                }
+                )
             }
 
-        }
-    )
+            Button(
+                onClick = {
+                    val isLogin = viewModel.Click()
+                    if (isLogin) {
+                        navController.navigate(route = NavRoute.Admin.route)
+                    }
+
+                    /* Нужно задать условие , что бы направить на
+                  Админа или Рабочего
+                  */
+
+                },
+                modifier =
+                Modifier
+                    .width(100.dp)
+                    .padding(bottom = 25.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = DarkGreen,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(text = "Войти")
+
+            }
+
+}
+)
 }
 
 
