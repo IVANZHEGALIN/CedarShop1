@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
@@ -24,8 +25,9 @@ import com.example.cedarshop.ui.theme.DarkGreen
 fun MainScreen(
     navController: NavHostController,
     viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-    ) {
+) {
     val loginPasswordState by viewModel.loginPasswordState.collectAsState()
+
 
 
 
@@ -50,77 +52,83 @@ fun MainScreen(
                 contentColor = Color.White,
                 elevation = 12.dp
             )
-        },
-        content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        )
+        {
 
-                var textLogin by remember { mutableStateOf(TextFieldValue("")) }
-                OutlinedTextField(
-                    value = textLogin,
-                    label = { Text(text = "Логин") },
-                    onValueChange = { value ->
-                        textLogin = value
-                        viewModel.onTextLogin(value.text)
-                       // while (loginPasswordState.hasLoginError) {
+            var textLogin by remember { mutableStateOf(TextFieldValue("")) }
+            var isErrorLogin = loginPasswordState.hasLoginError
+            OutlinedTextField(
+                value = textLogin,
+                label = { Text(text = "Логин") },
+                onValueChange = { value ->
+                    textLogin = value
+                    viewModel.onTextLogin(value.text)
+                    isErrorLogin = false
 
-                       // }
-                    },
-                )
-
-
-                var textPassword by remember { mutableStateOf(TextFieldValue("")) }
-                OutlinedTextField(
-                    value = textPassword,
-                    label = { Text(text = "Пароль") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    onValueChange = { value ->
-                        textPassword = value
-                        viewModel.onTextPassword(value.text)
-                    },
-                    //singleLine = true,
-                    //isError = loginError,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                    // if (loginError) {
-                    // Text(text = "Неверный логин",
-                    // color = MaterialTheme.colors.error,
-                    //    style = MaterialTheme.shapes.medium,
-                    //    modifier = Modifier.padding(start = 16.dp)
-
+                },
+                isError = isErrorLogin
+            )
+            if (isErrorLogin){
+                Text(text = "Неверный логин",
+                    color = Color.Red,
+                    style = TextStyle.Default,
+                    modifier = Modifier.padding(start = 16.dp)
                 )
             }
+
+
+            var textPassword by remember { mutableStateOf(TextFieldValue("")) }
+            var isErrorPassword = loginPasswordState.hasPasswordError
+            OutlinedTextField(
+                value = textPassword,
+                label = { Text(text = "Пароль") },
+                visualTransformation = PasswordVisualTransformation(),
+                onValueChange = { value ->
+                    textPassword = value
+                    viewModel.onTextPassword(value.text)
+                    isErrorPassword = false
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                isError = isErrorPassword
+
+            )
+            if (isErrorPassword){
+                Text(text = "Неверный пароль",
+                    color = Color.Red,
+                    style = TextStyle.Default,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+
+
 
             Button(
                 onClick = {
                     val isLogin = viewModel.Click()
-                    if (isLogin) {
-                        navController.navigate(route = NavRoute.Admin.route)
-                    }
-
-                    /* Нужно задать условие , что бы направить на
-                  Админа или Рабочего
-                  */
-
-                },
-                modifier =
-                Modifier
+                    if (isLogin) navController.navigate(route = NavRoute.Admin.route) },
+                modifier = Modifier
                     .width(100.dp)
                     .padding(bottom = 25.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = DarkGreen,
                     contentColor = Color.White
                 )
-            ) {
+
+            )
+            {
                 Text(text = "Войти")
 
             }
+        }
 
-}
-)
+    }
 }
 
 
