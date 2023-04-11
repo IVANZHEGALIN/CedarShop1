@@ -1,4 +1,4 @@
-package com.example.cedarshop.screens
+package com.example.cedarshop.presentation
 
 
 import androidx.compose.foundation.layout.Box

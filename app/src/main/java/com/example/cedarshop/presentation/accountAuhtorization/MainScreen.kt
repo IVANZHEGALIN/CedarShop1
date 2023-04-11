@@ -1,4 +1,4 @@
-package com.example.cedarshop.screens
+package com.example.cedarshop.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
-import com.example.cedarshop.screens.account.AccountViewModel
+import com.example.cedarshop.presentation.accountAuhtorization.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
@@ -73,10 +73,12 @@ fun MainScreen(
                     isErrorLogin = false
 
                 },
-                isError = isErrorLogin
+                isError = isErrorLogin,
+                singleLine = true
             )
-            if (isErrorLogin){
-                Text(text = "Неверный логин",
+            if (isErrorLogin) {
+                Text(
+                    text = "Неверный логин",
                     color = Color.Red,
                     style = TextStyle.Default,
                     modifier = Modifier.padding(start = 16.dp)
@@ -96,11 +98,13 @@ fun MainScreen(
                     isErrorPassword = false
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                isError = isErrorPassword
+                isError = isErrorPassword,
 
-            )
-            if (isErrorPassword){
-                Text(text = "Неверный пароль",
+
+                )
+            if (isErrorPassword) {
+                Text(
+                    text = "Неверный пароль",
                     color = Color.Red,
                     style = TextStyle.Default,
                     modifier = Modifier.padding(start = 16.dp)
@@ -112,7 +116,8 @@ fun MainScreen(
             Button(
                 onClick = {
                     val isLogin = viewModel.Click()
-                    if (isLogin) navController.navigate(route = NavRoute.Admin.route) },
+                    if (isLogin) navController.navigate(route = NavRoute.Admin.route)
+                },
                 modifier = Modifier
                     .width(100.dp)
                     .padding(bottom = 25.dp),

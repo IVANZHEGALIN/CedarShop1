@@ -1,4 +1,4 @@
-package com.example.cedarshop.screens.account
+package com.example.cedarshop.presentation.accountAuhtorization
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
