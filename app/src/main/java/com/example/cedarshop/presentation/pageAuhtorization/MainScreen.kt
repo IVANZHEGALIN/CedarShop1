@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
-import com.example.cedarshop.presentation.accountAuhtorization.AccountViewModel
+import com.example.cedarshop.presentation.pageAuhtorization.AccountViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 

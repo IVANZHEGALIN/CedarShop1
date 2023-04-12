@@ -1,4 +1,4 @@
-package com.example.cedarshop.presentation.accountAuhtorization
+package com.example.cedarshop.presentation.pageAuhtorization
 
 data class LoginPassword (
     val login: String = "" ,

@@ -1,4 +1,4 @@
-package com.example.cedarshop.presentation.accountAuhtorization
+package com.example.cedarshop.presentation.pageAuhtorization
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +25,7 @@ class AccountViewModel : ViewModel() {
 
 
     fun Click(): Boolean {
+         ///// сбросить ошибки
         if (login != mutableLoginListState.value.login ) {
             mutableLoginListState.update { state-> state.copy(hasLoginError = true) }
             return false
