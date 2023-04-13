@@ -4,6 +4,7 @@ package com.example.cedarshop.presentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,6 +13,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,11 +27,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
+import com.example.cedarshop.presentation.listWorkers.ListWorkerState
+import com.example.cedarshop.presentation.listWorkers.ListWorkerViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun AdminScreen(navController: NavHostController) {
+fun AdminScreen(navController: NavHostController,
+viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+    val listWorkerState by viewModel.listWorker.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -63,30 +71,37 @@ fun AdminScreen(navController: NavHostController) {
         floatingActionButton = {
             FloatingActionButton(
                 content = {
-                    Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                    Icon(Icons.Filled.Add, contentDescription = "Добавить")
                 },
-                onClick = {navController.navigate(route = NavRoute.AddNewWorker.route)},
+                onClick = { navController.navigate(route = NavRoute.AddNewWorker.route) },
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
             )
         },
         bottomBar = {
-            BottomAppBar(backgroundColor = DarkGreen){
+            BottomAppBar(backgroundColor = DarkGreen) {
 
             }
 
-                IconButton(onClick = {navController.navigate(route = NavRoute.Admin.route)}) {
-                    Icon(
-                        Icons.Filled.AccountBox,
-                        contentDescription = "Аккаунт"
-                    )
-                }
+            IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }) {
+                Icon(
+                    Icons.Filled.AccountBox,
+                    contentDescription = "Аккаунт"
+                )
+            }
 
         }
     )
     {
-        Column() {
-            WorkerItem(title = "", subtitle = "", navController = navController)
+//        Column() {
+//            WorkerItem(FirstName = "Ivan", LastName = "Petrov", Position = "top manager", navController = navController)
+//            WorkerItem(FirstName = "Iliy", LastName = "Popov", Position = "worker", navController = navController)
+//            WorkerItem(FirstName = "", LastName = "", Position = "", navController = navController)
+//        }
+        LazyColumn{ items (ListWorkerState){ListWorkerState -> WorkerItem(
+            list =ListWorkerState() ,
+            navController = NavHostController()
+        )} }
 
         }
     }
@@ -101,15 +116,13 @@ fun PrevAdminScreen() {
 }
 
 
-
-
 @Composable
-fun WorkerItem(title: String, subtitle: String, navController: NavHostController) {
+fun WorkerItem(list: ListWorkerState, navController: NavHostController) {
     Card(
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
-            .clickable { navController.navigate(route = NavRoute.ControlWorkerTask.route)},
+            .clickable { navController.navigate(route = NavRoute.ControlWorkerTask.route) },
         elevation = 6.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -124,17 +137,22 @@ fun WorkerItem(title: String, subtitle: String, navController: NavHostController
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
-                    text = "Фамилия Имя",
+                    text = list.firstName,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Должноcть",
+                    text = list.lastName,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = list.position,
                     fontSize = 16.sp
                 )
 
-                }
-            Spacer(modifier = Modifier.weight(1f,true))
+            }
+            Spacer(modifier = Modifier.weight(1f, true))
             IconButton(onClick = { navController.navigate(route = NavRoute.AddNewWorker.route) }) {
                 Icon(
                     Icons.Filled.Settings,
