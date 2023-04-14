@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -33,9 +34,13 @@ import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun AdminScreen(navController: NavHostController,
-viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
-    val listWorkerState by viewModel.listWorker.collectAsState()
+fun AdminScreen(
+    navController: NavHostController,
+    viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    val listWorkerAdmin by viewModel.listWorker.collectAsState()
+
+
 
     Scaffold(
         topBar = {
@@ -98,14 +103,18 @@ viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
 //            WorkerItem(FirstName = "Iliy", LastName = "Popov", Position = "worker", navController = navController)
 //            WorkerItem(FirstName = "", LastName = "", Position = "", navController = navController)
 //        }
-        LazyColumn{ items (ListWorkerState){ListWorkerState -> WorkerItem(
-            list =ListWorkerState() ,
-            navController = NavHostController()
-        )} }
+        LazyColumn {items(listWorkerAdmin.piopleWorker) { workers -> WorkerItem(
+            list = ListWorkerState(),
+            navController = navController
+        )
+
+
+        }
 
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -137,19 +146,19 @@ fun WorkerItem(list: ListWorkerState, navController: NavHostController) {
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
-                    text = list.firstName,
+                    text = list.piopleWorker.toString(),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
-                    text = list.lastName,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = list.position,
-                    fontSize = 16.sp
-                )
+//                Text(
+//                    text = lastName,
+//                    fontSize = 20.sp,
+//                    fontWeight = FontWeight.Bold
+//                )
+//                Text(
+//                    text = position,
+//                    fontSize = 16.sp
+//                )
 
             }
             Spacer(modifier = Modifier.weight(1f, true))

@@ -1,13 +1,19 @@
 package com.example.cedarshop.navigation
 
+class Jackets(
+    val seasonality: String,
+    val material: String,
+    val gender: String,
+    private var wear: Int = 100
+) {
+    fun heat() {}
+    fun protect() {}
+    private fun calculateWear(time: Int) {
+        if (time > 10) {
+            wear = 90
 
-data class Personnel(
-    val firstname: String,
-    val lastname: String,
-    val position: String,
-    val number: Int,
-    val login: String,
-    val password: String
-)
+        }
+    }
+}
 
 
