@@ -30,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
 import com.example.cedarshop.presentation.listWorkers.ListWorkerState
 import com.example.cedarshop.presentation.listWorkers.ListWorkerViewModel
+import com.example.cedarshop.presentation.listWorkers.Worker
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
@@ -38,8 +39,8 @@ fun AdminScreen(
     navController: NavHostController,
     viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val listWorkerAdmin by viewModel.listWorker.collectAsState()
-
+    //val listWorkerAdmin by viewModel.listWorker.collectAsState()
+    val state = ListWorkerState()
 
 
     Scaffold(
@@ -98,18 +99,17 @@ fun AdminScreen(
         }
     )
     {
-//        Column() {
-//            WorkerItem(FirstName = "Ivan", LastName = "Petrov", Position = "top manager", navController = navController)
-//            WorkerItem(FirstName = "Iliy", LastName = "Popov", Position = "worker", navController = navController)
-//            WorkerItem(FirstName = "", LastName = "", Position = "", navController = navController)
-//        }
-        LazyColumn {items(listWorkerAdmin.piopleWorker) { workers -> WorkerItem(
-            list = ListWorkerState(),
-            navController = navController
-        )
 
 
-        }
+        LazyColumn {
+            items(state.piopleWorker) { workers ->
+                WorkerItem(
+                    worker = workers,
+                    navController = navController
+                )
+
+
+            }
 
         }
     }
@@ -126,7 +126,11 @@ fun PrevAdminScreen() {
 
 
 @Composable
-fun WorkerItem(list: ListWorkerState, navController: NavHostController) {
+
+fun WorkerItem(
+    worker: Worker,
+    navController: NavHostController
+) {
     Card(
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
@@ -146,19 +150,19 @@ fun WorkerItem(list: ListWorkerState, navController: NavHostController) {
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
-                    text = list.piopleWorker.toString(),
+                    text = worker.firstName,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
-//                Text(
-//                    text = lastName,
-//                    fontSize = 20.sp,
-//                    fontWeight = FontWeight.Bold
-//                )
-//                Text(
-//                    text = position,
-//                    fontSize = 16.sp
-//                )
+                Text(
+                    text = worker.lastName,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = worker.position,
+                    fontSize = 16.sp
+                )
 
             }
             Spacer(modifier = Modifier.weight(1f, true))
