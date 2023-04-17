@@ -1,12 +1,10 @@
 package com.example.cedarshop.presentation
 
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,13 +26,21 @@ fun TaskScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
+
+                navigationIcon = {
+                    IconButton(onClick =
+                    { navController.navigate(route = NavRoute.ControlWorkerTask.route) })
+                    {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
                 title = {
                     Text(
                         text = "Задачи",
-                        modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                     )
                 },
+
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
                 elevation = 12.dp

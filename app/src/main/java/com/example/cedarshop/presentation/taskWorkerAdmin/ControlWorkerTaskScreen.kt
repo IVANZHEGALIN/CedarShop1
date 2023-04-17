@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
@@ -27,19 +28,23 @@ fun ControlWorkerTaskScreen(navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
+//                    Row(
+//                        Modifier
+//                            .fillMaxSize()
+//                            .padding(top = 15.dp),
+//                        horizontalArrangement = Arrangement.Center
+//                    )
+                    Text(
+                        text = "Имя рабочего",
                     )
 
+                },
+                navigationIcon = {
+                    IconButton(onClick =
+                    { navController.navigate(route = NavRoute.Admin.route) })
                     {
-                        Text(
-                            text = "Имя рабочего",
-                        )
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
-
                 },
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
@@ -51,7 +56,7 @@ fun ControlWorkerTaskScreen(navController: NavHostController) {
                 content = {
                     Icon(Icons.Filled.Add, contentDescription = "Добавить")
                 },
-                onClick = { navController.navigate(route = NavRoute.AddNewTaskWorker.route)},
+                onClick = { navController.navigate(route = NavRoute.AddNewTaskWorker.route) },
                 backgroundColor = DarkGreen,
                 contentColor = Color.White,
             )

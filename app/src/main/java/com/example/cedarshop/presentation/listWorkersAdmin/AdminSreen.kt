@@ -14,8 +14,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,9 +26,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
-import com.example.cedarshop.presentation.listWorkers.ListWorkerState
-import com.example.cedarshop.presentation.listWorkers.ListWorkerViewModel
-import com.example.cedarshop.presentation.listWorkers.Worker
+import com.example.cedarshop.presentation.listWorkersAdmin.ListWorkerState
+import com.example.cedarshop.presentation.listWorkersAdmin.ListWorkerViewModel
+import com.example.cedarshop.presentation.listWorkersAdmin.Worker
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
@@ -140,7 +138,7 @@ fun WorkerItem(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-                painter = painterResource(id = com.example.cedarshop.R.drawable.anton_manager),
+                painter = painterResource(worker.photoID),
                 contentDescription = "Contact profile picture",
                 modifier = Modifier
                     .size(70.dp)
