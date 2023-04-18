@@ -116,7 +116,11 @@ fun MainScreen(
             Button(
                 onClick = {
                     val isLogin = viewModel.Click()
-                    if (isLogin) navController.navigate(route = NavRoute.Admin.route)
+                    if (isLogin) navController.navigate(route = NavRoute.Admin.route){
+                        popUpTo(NavRoute.Main.route){  // Navigate to a composable
+                            inclusive = true
+                        }
+                    }
                 },
                 modifier = Modifier
                     .width(100.dp)
