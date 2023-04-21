@@ -2,6 +2,8 @@ package com.example.cedarshop.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -19,11 +21,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
+import com.example.cedarshop.presentation.taskWorkerAdmin.Card
+import com.example.cedarshop.presentation.taskWorkerAdmin.ControlWorkerTaskState
+import com.example.cedarshop.presentation.taskWorkerAdmin.ControlWorkerTaskViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun ControlWorkerTaskScreen(navController: NavHostController) {
+fun ControlWorkerTaskScreen(
+    navController: NavHostController,
+    viewModel: ControlWorkerTaskViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    val taskState = ControlWorkerTaskState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -35,7 +44,7 @@ fun ControlWorkerTaskScreen(navController: NavHostController) {
 //                        horizontalArrangement = Arrangement.Center
 //                    )
                     Text(
-                        text = "Имя рабочего",
+                        text = "Имя рабочего", // имя рабочего нужно как то взять с карточки рабочего ListWorker (AdminScreen)
                     )
 
                 },
@@ -73,9 +82,17 @@ fun ControlWorkerTaskScreen(navController: NavHostController) {
         }
     )
     {
-        Column {
-            StatusTaskItem(title = "", subtitle = "", navController = navController)
+        LazyColumn {
+            items(taskState.cardTask) { task ->
+                StatusTaskItem(
+                    taskList = task,
+                    navController = navController
+                )
+            }
         }
+//        Column {
+//            StatusTaskItem(titleTask =  "", task = "", navController = navController)
+//        }
     }
 }
 
@@ -90,7 +107,7 @@ fun PrevControlWorkerTaskScreen() {
 
 
 @Composable
-fun StatusTaskItem(title: String, subtitle: String, navController: NavHostController) {
+fun StatusTaskItem(taskList: Card, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -105,13 +122,13 @@ fun StatusTaskItem(title: String, subtitle: String, navController: NavHostContro
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "Наименование задачи",
+                    text = taskList.titleTask,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 5.dp, top = 5.dp, bottom = 10.dp)
                 )
                 Text(
-                    text = "Техническое задание",
+                    text = taskList.task,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(start = 10.dp, bottom = 10.dp)
                 )

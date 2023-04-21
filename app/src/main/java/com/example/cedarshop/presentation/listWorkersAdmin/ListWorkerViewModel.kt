@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class ListWorkerViewModel : ViewModel() {
     private val mutableListWorkerState = MutableStateFlow(ListWorkerState())
-    val listWorker = mutableListWorkerState.asStateFlow()
+        //  val listWorker = mutableListWorkerState.asStateFlow()
 }
 
