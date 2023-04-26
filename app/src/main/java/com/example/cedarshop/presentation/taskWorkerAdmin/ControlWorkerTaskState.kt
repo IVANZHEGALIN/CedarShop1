@@ -10,11 +10,4 @@ data class ControlWorkerTaskState(
 class Card (
     val titleTask: String = "",
     val task: String = ""
-) {
-    fun delite(
-
-    ) {
-
-    }
-
-}
+)

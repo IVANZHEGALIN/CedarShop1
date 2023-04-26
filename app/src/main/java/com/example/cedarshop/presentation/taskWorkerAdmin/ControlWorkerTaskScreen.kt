@@ -37,12 +37,6 @@ fun ControlWorkerTaskScreen(
         topBar = {
             TopAppBar(
                 title = {
-//                    Row(
-//                        Modifier
-//                            .fillMaxSize()
-//                            .padding(top = 15.dp),
-//                        horizontalArrangement = Arrangement.Center
-//                    )
                     Text(
                         text = "Имя рабочего", // имя рабочего нужно как то взять с карточки рабочего ListWorker (AdminScreen)
                     )
@@ -90,9 +84,7 @@ fun ControlWorkerTaskScreen(
                 )
             }
         }
-//        Column {
-//            StatusTaskItem(titleTask =  "", task = "", navController = navController)
-//        }
+
     }
 }
 
@@ -121,24 +113,28 @@ fun StatusTaskItem(taskList: Card, navController: NavHostController) {
                     .padding(vertical = 2.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(
-                    text = taskList.titleTask,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 5.dp, top = 5.dp, bottom = 10.dp)
-                )
+                Row() {
+                    Text(
+                        text = taskList.titleTask,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(start = 5.dp, top = 5.dp, bottom = 10.dp)
+                    )
+                    Spacer(modifier = Modifier.weight(1f, true))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Filled.Delete,
+                            contentDescription = "Удалить"
+                        )
+                    }
+                }
                 Text(
                     text = taskList.task,
                     fontSize = 20.sp,
-                    modifier = Modifier.padding(start = 10.dp, bottom = 10.dp)
-                )
-
-            }
-            Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { }) {
-                Icon(
-                    Icons.Filled.Delete,
-                    contentDescription = "Удалить"
+                    modifier = Modifier.padding(
+                        start = 10.dp, bottom = 10.dp, end = 5
+                            .dp
+                    )
                 )
             }
         }
