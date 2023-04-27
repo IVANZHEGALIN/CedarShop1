@@ -20,7 +20,7 @@ import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun WorkerScreen(navController: NavHostController) {
+fun WorkerScreen(navController: NavHostController) {   // отражаются задачи которые в taskWorkerAdmin
     Scaffold(
         topBar = {
             TopAppBar(

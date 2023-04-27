@@ -1,10 +1,14 @@
 package com.example.cedarshop.presentation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,17 +31,16 @@ fun AccountSettingsScreen(navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
+                    Text(
+                        text = "Настроки профиля",
                     )
 
+                },
+                navigationIcon = {
+                    IconButton(onClick =
+                    { navController.navigate(route = NavRoute.Account.route) })
                     {
-                        Text(
-                            text = "Настроки профиля",
-                        )
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 backgroundColor = DarkGreen,
@@ -62,7 +65,7 @@ fun AccountSettingsScreen(navController: NavHostController) {
                 backgroundColor = DarkGreen
             )
             {
-                IconButton(onClick = { navController.navigate(route = NavRoute.Account.route) }
+                IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }
 
                 )
                 { Icon(Icons.Filled.Home, contentDescription = "Home") }
@@ -81,7 +84,6 @@ fun PrevAccountSettingsScreen() {
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun Photo() {
@@ -95,8 +97,10 @@ fun Photo() {
 @Preview(showBackground = true)
 @Composable
 fun ButtonDownloadPhoto() {
-    Button(onClick = { /*TODO*/ },
-        modifier = Modifier.padding(top= 5.dp))
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier.padding(top = 5.dp)
+    )
     {
         Text(text = "Загрузить фото")
     }
@@ -138,11 +142,14 @@ fun TextFieldCardID() {
         )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun ButtonSaveSetting() {
-    Button(onClick = { /*TODO*/ },
-    modifier = Modifier.padding(top= 5.dp))
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier.padding(top = 5.dp)
+    )
 
     {
         Text(text = "Сохранить")

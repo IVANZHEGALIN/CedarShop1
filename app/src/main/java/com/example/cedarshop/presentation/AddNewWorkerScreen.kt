@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,153 +30,152 @@ fun AddNewWorkerScreen(navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
-                    )
-
-                    {
                         Text(
                             text = "Настроки профиля",
                         )
-                    }
+
+                    },
+                    navigationIcon = {
+                        IconButton(onClick =
+                        { navController.navigate(route = NavRoute.Admin.route) })
+                        {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        }
+                    },
+                    backgroundColor = DarkGreen,
+                    contentColor = Color.White,
+                    elevation = 12.dp
+                    )
                 },
-                backgroundColor = DarkGreen,
-                contentColor = Color.White,
-                elevation = 12.dp
+                content = {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    )
+                    {
+                        Column(
+                            modifier = Modifier
+                                .verticalScroll(rememberScrollState())
+                                .fillMaxSize()
+                                .padding(top = 30.dp, bottom = 60.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            PhotoNewWorker()
+                            ButtonDownloadPhotoNewWorker()
+                            TextFieldCardNewWorker()
+                            ButtonSaveSettingNewWorker()
+                        }
+                    }
+
+                },
+                bottomBar = {
+                    BottomNavigation(
+                        backgroundColor = DarkGreen
+                    )
+                    {
+                        IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }
+                        )
+                        { Icon(Icons.Filled.Home, contentDescription = "Home") }
+                    }
+                }
             )
-        },
-        content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+        }
+
+        @Preview(showBackground = true)
+        @Composable
+        fun PrevAddNewWorkerScreen() {
+            AddNewWorkerScreen(navController = rememberNavController())
+        }
+
+
+        @Preview(showBackground = true)
+        @Composable
+        fun PhotoNewWorker() {
+            Image(
+                painter = painterResource(id = R.drawable.anton_manager),
+                contentDescription = "Фото сотрудника"
+            )
+        }
+
+
+        @Preview(showBackground = true)
+        @Composable
+        fun ButtonDownloadPhotoNewWorker() {
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.padding(top = 5.dp)
             )
             {
-                Column(
-                    modifier = Modifier
-                        .verticalScroll(rememberScrollState())
-                        .fillMaxSize()
-                        .padding(top =30.dp, bottom = 60.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    PhotoNewWorker()
-                    ButtonDownloadPhotoNewWorker()
-                    TextFieldCardNewWorker()
-                    ButtonSaveSettingNewWorker()
+                Text(text = "Загрузить фото")
+            }
+        }
+
+
+        @Preview(showBackground = true)
+        @Composable
+        fun TextFieldCardNewWorker() {
+            var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
+            var textName by remember { mutableStateOf(TextFieldValue("")) }
+            var textPosition by remember { mutableStateOf(TextFieldValue("")) }
+            var textNumber by remember { mutableStateOf(TextFieldValue("")) }
+            var textLogin by remember { mutableStateOf(TextFieldValue("")) }
+            var textPassword by remember { mutableStateOf(TextFieldValue("")) }
+            Column {
+
+                OutlinedTextField(
+                    modifier = Modifier.padding(top = 5.dp),
+                    value = textFirstName,
+                    onValueChange = { textFirstName = it },
+                    label = { Text(text = "Фамилия") }
+
+                )
+                OutlinedTextField(
+                    value = textName,
+                    label = { Text(text = "Имя") },
+                    onValueChange = { textName = it }
+                )
+                OutlinedTextField(
+                    value = textPosition,
+                    label = { Text(text = "Должность") },
+                    onValueChange = { textPosition = it }
+                )
+                OutlinedTextField(
+                    value = textNumber,
+                    label = { Text(text = "Номер") },
+                    onValueChange = { textNumber = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+                OutlinedTextField(
+                    value = textLogin,
+                    label = { Text(text = "Логин") },
+                    onValueChange = { textLogin = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+                OutlinedTextField(
+                    value = textPassword,
+                    label = { Text(text = "Пароль") },
+                    onValueChange = { textPassword = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+            }
+        }
+
+        @Preview(showBackground = true)
+        @Composable
+        fun ButtonSaveSettingNewWorker() {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.padding(top = 5.dp)
+                )
+                {
+                    Text(text = "Сохранить")
                 }
             }
-
-        },
-        bottomBar = {
-            BottomNavigation(
-                backgroundColor = DarkGreen
-            )
-            {
-                IconButton(onClick = { navController.navigate(route = NavRoute.Admin.route) }
-                )
-                { Icon(Icons.Filled.Home, contentDescription = "Home") }
-            }
         }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PrevAddNewWorkerScreen() {
-    AddNewWorkerScreen(navController = rememberNavController())
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PhotoNewWorker() {
-    Image(
-        painter = painterResource(id = R.drawable.anton_manager),
-        contentDescription = "Фото сотрудника"
-    )
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun ButtonDownloadPhotoNewWorker() {
-    Button(
-        onClick = { /*TODO*/ },
-        modifier = Modifier.padding(top = 5.dp)
-    )
-    {
-        Text(text = "Загрузить фото")
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun TextFieldCardNewWorker() {
-    var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
-    var textName by remember { mutableStateOf(TextFieldValue("")) }
-    var textPosition by remember { mutableStateOf(TextFieldValue("")) }
-    var textNumber by remember { mutableStateOf(TextFieldValue("")) }
-    var textLogin by remember { mutableStateOf(TextFieldValue("")) }
-    var textPassword by remember { mutableStateOf(TextFieldValue("")) }
-    Column {
-
-        OutlinedTextField(
-            modifier = Modifier.padding(top = 5.dp),
-            value = textFirstName,
-            onValueChange = { textFirstName = it },
-            label = { Text(text = "Фамилия") }
-
-        )
-        OutlinedTextField(
-            value = textName,
-            label = { Text(text = "Имя") },
-            onValueChange = { textName = it }
-        )
-        OutlinedTextField(
-            value = textPosition,
-            label = { Text(text = "Должность") },
-            onValueChange = { textPosition = it }
-        )
-        OutlinedTextField(
-            value = textNumber,
-            label = { Text(text = "Номер") },
-            onValueChange = { textNumber = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
-        OutlinedTextField(
-            value = textLogin,
-            label = { Text(text = "Логин") },
-            onValueChange = { textLogin = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
-        OutlinedTextField(
-            value = textPassword,
-            label = { Text(text = "Пароль") },
-            onValueChange = { textPassword = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ButtonSaveSettingNewWorker() {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(top = 5.dp)
-        )
-        {
-            Text(text = "Сохранить")
-        }
-    }
-}
 
 
 

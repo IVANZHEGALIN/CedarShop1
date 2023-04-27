@@ -7,7 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,26 +21,30 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.R
 import com.example.cedarshop.navigation.NavRoute
+import com.example.cedarshop.presentation.pageUserAdmin.UserState
+import com.example.cedarshop.presentation.pageUserAdmin.UserViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun AccountScreen(navController: NavHostController) {
+fun AccountScreen(
+    navController: NavHostController,
+    viewModel: UserViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    val state = UserState()
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
+                    Text(
+                        text = "Профиль",
                     )
-
+                },
+                navigationIcon = {
+                    IconButton(onClick =
+                    { navController.navigate(route = NavRoute.Admin.route) })
                     {
-                        Text(
-                            text = "Профиль",
-                        )
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 backgroundColor = DarkGreen,
@@ -57,7 +61,7 @@ fun AccountScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 ImageWorker()
-                TextCardID()
+                TextCardID(state = UserState())
             }
         },
         bottomBar = {
@@ -92,23 +96,23 @@ fun PrevAccountScreen() {
 }
 
 
-
 // CONTENT
 @Preview(showBackground = true)
 @Composable
 fun ImageWorker() {
 
-        Image(
-            contentScale = ContentScale.Fit,
-            painter = painterResource(id = R.drawable.anton_manager),
-            contentDescription = "Фото сотрудника"
-        )
-    }
+    Image(
+        contentScale = ContentScale.Fit,
+        painter = painterResource(id = R.drawable.anton_manager),
+        contentDescription = "Фото сотрудника"
+    )
+}
 
 
-@Preview(showBackground = true)
+
 @Composable
-fun TextCardID() {
+fun TextCardID(state: UserState
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -117,24 +121,24 @@ fun TextCardID() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Фамилия",
+            text = state.firstName,
             fontSize = 15.sp,
             fontFamily = FontFamily.Serif
         )
         Text(
-            text = "Имя",
-            fontSize =15.sp,
-            fontFamily = FontFamily.Serif,
-            modifier = Modifier.padding(top = 5.dp)
-        )
-        Text(
-            text = "Должность",
+            text = state.firstName,
             fontSize = 15.sp,
             fontFamily = FontFamily.Serif,
             modifier = Modifier.padding(top = 5.dp)
         )
         Text(
-            text = "Номер",
+            text = state.position,
+            fontSize = 15.sp,
+            fontFamily = FontFamily.Serif,
+            modifier = Modifier.padding(top = 5.dp)
+        )
+        Text(
+            text = state.Number.toString(),
             fontSize = 15.sp,
             fontFamily = FontFamily.Serif,
             modifier = Modifier.padding(top = 5.dp)

@@ -137,13 +137,24 @@ fun WorkerItem(
         elevation = 6.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(worker.photoID),
-                contentDescription = "Contact profile picture",
-                modifier = Modifier
-                    .size(70.dp)
-                    .clip(CircleShape)
-            )
+            IconButton(onClick = { navController.navigate(route = NavRoute.Account.route) }) {
+                Image(
+                    painter = painterResource(worker.photoID),
+                    contentDescription = "Contact profile picture",
+                    modifier = Modifier
+                        .size(70.dp)
+                        .clip(CircleShape)
+                )
+
+            }
+
+//            Image(
+//                painter = painterResource(worker.photoID),
+//                contentDescription = "Contact profile picture",
+//                modifier = Modifier
+//                    .size(70.dp)
+//                    .clip(CircleShape)
+//            )
 
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
