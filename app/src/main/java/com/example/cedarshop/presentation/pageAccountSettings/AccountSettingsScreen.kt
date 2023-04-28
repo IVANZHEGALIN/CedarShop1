@@ -10,23 +10,32 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.R
 import com.example.cedarshop.navigation.NavRoute
+import com.example.cedarshop.presentation.pageAccountSettings.AccountSettingsState
+import com.example.cedarshop.presentation.pageAccountSettings.AccountSettingsViewMode
 import com.example.cedarshop.ui.theme.DarkGreen
 
 @Composable
-fun AccountSettingsScreen(navController: NavHostController) {
+fun AccountSettingsScreen(
+    navController: NavHostController,
+
+) {
+
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -109,35 +118,39 @@ fun ButtonDownloadPhoto() {
 
 @Preview(showBackground = true)
 @Composable
-fun TextFieldCardID() {
-    var textFirstName by remember { mutableStateOf(TextFieldValue("")) }
-    var textName by remember { mutableStateOf(TextFieldValue("")) }
-    var textPosition by remember { mutableStateOf(TextFieldValue("")) }
-    var textNumber by remember { mutableStateOf(TextFieldValue("")) }
+fun TextFieldCardID(
+    viewMode: AccountSettingsViewMode = viewModel()
+
+) {
+    val accountState by viewMode.accountState.collectAsState()
+//    var textFirstName by remember { mutableStateOf(TextFieldValue(state.firstName)) }
+//    var textName by remember { mutableStateOf(TextFieldValue(state.lastName)) }
+//    var textPosition by remember { mutableStateOf(TextFieldValue(state.position)) }
+//    var textNumber by remember { mutableStateOf(TextFieldValue(state.number)) }
     Column {
 
 
         OutlinedTextField(
             modifier = Modifier.padding(top = 5.dp),
-            value = textFirstName,
-            onValueChange = { textFirstName = it },
+            value = accountState.firstName,
+            onValueChange = { accountState.firstName },
             label = { Text(text = "Фамилия") }
 
         )
         OutlinedTextField(
-            value = textName,
+            value = accountState.lastName,
             label = { Text(text = "Имя") },
-            onValueChange = { textName = it }
+            onValueChange = { accountState.lastName }
         )
         OutlinedTextField(
-            value = textPosition,
+            value = accountState.position,
             label = { Text(text = "Должность") },
-            onValueChange = { textPosition = it }
+            onValueChange = { accountState.position }
         )
         OutlinedTextField(
-            value = textNumber,
+            value = accountState.number,
             label = { Text(text = "Номер") },
-            onValueChange = { textNumber = it },
+            onValueChange = { accountState.number },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
     }

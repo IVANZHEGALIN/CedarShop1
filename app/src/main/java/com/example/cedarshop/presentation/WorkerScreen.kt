@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,17 +26,16 @@ fun WorkerScreen(navController: NavHostController) {   // отражаются �
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.Center
-                    )
-
-                    {
                         Text(
                             text = "Текущие задачи",
                         )
+
+                },
+                navigationIcon = {
+                    IconButton(onClick =
+                    {  })
+                    {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 backgroundColor = DarkGreen,

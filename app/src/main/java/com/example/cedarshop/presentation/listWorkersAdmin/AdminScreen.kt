@@ -14,6 +14,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,7 +39,7 @@ fun AdminScreen(
     navController: NavHostController,
     viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    //val listWorkerAdmin by viewModel.listWorker.collectAsState()
+    val listWorkerAdmin by viewModel.listWorker.collectAsState()
     val state = ListWorkerState()
 
 
@@ -127,8 +129,12 @@ fun PrevAdminScreen() {
 
 fun WorkerItem(
     worker: Worker,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+
+
 ) {
+    val listWorkerAdmin by viewModel.listWorker.collectAsState()
     Card(
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
@@ -159,7 +165,7 @@ fun WorkerItem(
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
-                    text = worker.firstName,
+                    text = worker.lastName,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )

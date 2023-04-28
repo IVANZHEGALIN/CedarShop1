@@ -31,7 +31,7 @@ fun AccountScreen(
     navController: NavHostController,
     viewModel: UserViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val state = UserState()
+// val state = UserState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -126,7 +126,7 @@ fun TextCardID(state: UserState
             fontFamily = FontFamily.Serif
         )
         Text(
-            text = state.firstName,
+            text = state.lastName,
             fontSize = 15.sp,
             fontFamily = FontFamily.Serif,
             modifier = Modifier.padding(top = 5.dp)
