@@ -165,7 +165,7 @@ fun WorkerItem(
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(
-                    text = worker.lastName,
+                    text = worker.firstName,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )

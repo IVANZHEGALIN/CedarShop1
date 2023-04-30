@@ -11,6 +11,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
-import com.example.cedarshop.presentation.taskWorkerAdmin.Card
 import com.example.cedarshop.presentation.taskWorkerAdmin.ControlWorkerTaskState
 import com.example.cedarshop.presentation.taskWorkerAdmin.ControlWorkerTaskViewModel
 import com.example.cedarshop.ui.theme.CedarShopTheme
@@ -32,7 +33,7 @@ fun ControlWorkerTaskScreen(
     navController: NavHostController,
     viewModel: ControlWorkerTaskViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val taskState = ControlWorkerTaskState()
+    val taskState by viewModel.listWorkerTask.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,7 +100,7 @@ fun PrevControlWorkerTaskScreen() {
 
 
 @Composable
-fun StatusTaskItem(taskList: Card, navController: NavHostController) {
+fun StatusTaskItem(taskList: ControlWorkerTaskState.Card, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

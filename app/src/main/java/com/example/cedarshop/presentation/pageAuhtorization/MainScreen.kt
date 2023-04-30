@@ -26,7 +26,7 @@ fun MainScreen(
     navController: NavHostController,
     viewModel: AccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
-    val loginPasswordState by viewModel.loginPasswordState.collectAsState()
+    val stateLoginPassword by viewModel.loginPasswordState.collectAsState()
 
 
 
@@ -63,7 +63,7 @@ fun MainScreen(
         {
 
             var textLogin by remember { mutableStateOf(TextFieldValue("")) }
-            var isErrorLogin = loginPasswordState.hasLoginError
+            var isErrorLogin = stateLoginPassword.hasLoginError
             OutlinedTextField(
                 value = textLogin,
                 label = { Text(text = "Логин") },
@@ -87,7 +87,7 @@ fun MainScreen(
 
 
             var textPassword by remember { mutableStateOf(TextFieldValue("")) }
-            var isErrorPassword = loginPasswordState.hasPasswordError
+            var isErrorPassword = stateLoginPassword.hasPasswordError
             OutlinedTextField(
                 value = textPassword,
                 label = { Text(text = "Пароль") },
