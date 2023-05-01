@@ -30,7 +30,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cedarshop.navigation.NavRoute
 import com.example.cedarshop.presentation.listWorkersAdmin.ListWorkerState
 import com.example.cedarshop.presentation.listWorkersAdmin.ListWorkerViewModel
-import com.example.cedarshop.presentation.listWorkersAdmin.Worker
 import com.example.cedarshop.ui.theme.CedarShopTheme
 import com.example.cedarshop.ui.theme.DarkGreen
 
@@ -40,7 +39,7 @@ fun AdminScreen(
     viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val listWorkerAdmin by viewModel.listWorker.collectAsState()
-    val state = ListWorkerState()
+    // val state = ListWorkerState()
 
 
     Scaffold(
@@ -102,7 +101,7 @@ fun AdminScreen(
 
 
         LazyColumn {
-            items(state.piopleWorker) { workers ->
+            items(listWorkerAdmin.piopleWorker) { workers ->
                 WorkerItem(
                     worker = workers,
                     navController = navController
@@ -128,13 +127,12 @@ fun PrevAdminScreen() {
 @Composable
 
 fun WorkerItem(
-    worker: Worker,
+    worker: ListWorkerState.Worker,
     navController: NavHostController,
     viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 
 
 ) {
-    val listWorkerAdmin by viewModel.listWorker.collectAsState()
     Card(
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
@@ -153,15 +151,6 @@ fun WorkerItem(
                 )
 
             }
-
-//            Image(
-//                painter = painterResource(worker.photoID),
-//                contentDescription = "Contact profile picture",
-//                modifier = Modifier
-//                    .size(70.dp)
-//                    .clip(CircleShape)
-//            )
-
             Spacer(modifier = Modifier.width(8.dp))
             Column() {
                 Text(

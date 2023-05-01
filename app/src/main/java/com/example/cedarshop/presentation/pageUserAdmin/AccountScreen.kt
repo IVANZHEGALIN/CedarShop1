@@ -2,12 +2,15 @@ package com.example.cedarshop.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,7 +34,7 @@ fun AccountScreen(
     navController: NavHostController,
     viewModel: UserViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-// val state = UserState()
+    val stateUser by viewModel.pageUser.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -53,15 +56,13 @@ fun AccountScreen(
             )
         },
 
-
         content = {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                ImageWorker()
-                TextCardID(state = UserState())
+            LazyColumn {
+                item(stateUser.idUser) {
+                    CardID(
+                        state = stateUser.idUser
+                    )
+                }
             }
         },
         bottomBar = {
@@ -83,7 +84,9 @@ fun AccountScreen(
 
             }
         }
+
     )
+
 
 }
 
@@ -95,56 +98,49 @@ fun PrevAccountScreen() {
     }
 }
 
-
 // CONTENT
-@Preview(showBackground = true)
 @Composable
-fun ImageWorker() {
+fun CardID(
+    state: UserState.id,
 
+    ) {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(top = 25.dp, start = 150.dp),
+//        horizontalAlignment = Alignment.Start,
+//        verticalArrangement = Arrangement.Center
+//    ) {
     Image(
         contentScale = ContentScale.Fit,
         painter = painterResource(id = R.drawable.anton_manager),
         contentDescription = "Фото сотрудника"
     )
+    Text(
+        text = state.firstName,
+        fontSize = 15.sp,
+        fontFamily = FontFamily.Serif
+    )
+    Text(
+        text = state.lastName,
+        fontSize = 15.sp,
+        fontFamily = FontFamily.Serif,
+        modifier = Modifier.padding(top = 5.dp)
+    )
+    Text(
+        text = state.position,
+        fontSize = 15.sp,
+        fontFamily = FontFamily.Serif,
+        modifier = Modifier.padding(top = 5.dp)
+    )
+    Text(
+        text = state.Number.toString(),
+        fontSize = 15.sp,
+        fontFamily = FontFamily.Serif,
+        modifier = Modifier.padding(top = 5.dp)
+    )
 }
 
-
-
-@Composable
-fun TextCardID(state: UserState
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 25.dp, start = 150.dp),
-        horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = state.firstName,
-            fontSize = 15.sp,
-            fontFamily = FontFamily.Serif
-        )
-        Text(
-            text = state.lastName,
-            fontSize = 15.sp,
-            fontFamily = FontFamily.Serif,
-            modifier = Modifier.padding(top = 5.dp)
-        )
-        Text(
-            text = state.position,
-            fontSize = 15.sp,
-            fontFamily = FontFamily.Serif,
-            modifier = Modifier.padding(top = 5.dp)
-        )
-        Text(
-            text = state.Number.toString(),
-            fontSize = 15.sp,
-            fontFamily = FontFamily.Serif,
-            modifier = Modifier.padding(top = 5.dp)
-        )
-    }
-}
 
 
 
