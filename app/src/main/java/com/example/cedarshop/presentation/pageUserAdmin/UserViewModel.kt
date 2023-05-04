@@ -7,4 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class UserViewModel: ViewModel(){
     private val mutableUser = MutableStateFlow(UserState())
     val pageUser = mutableUser.asStateFlow()
+
+
 }
+

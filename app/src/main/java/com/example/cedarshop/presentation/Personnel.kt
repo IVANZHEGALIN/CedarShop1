@@ -17,3 +17,37 @@ class Jackets(
 }
 
 
+ class User(
+    val name: String,
+    val city: String
+) {
+    fun writecode() {}
+
+}
+
+
+class Ivan(
+    val age: Int,
+    info: User)
+{
+    fun cod (){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -58,9 +58,9 @@ fun AccountScreen(
 
         content = {
             LazyColumn {
-                item(stateUser.idUser) {
+                item(stateUser) {
                     CardID(
-                        state = stateUser.idUser
+                        state = stateUser
                     )
                 }
             }
@@ -101,9 +101,11 @@ fun PrevAccountScreen() {
 // CONTENT
 @Composable
 fun CardID(
-    state: UserState.id,
+
+    state: UserState,
 
     ) {
+
 //    Column(
 //        modifier = Modifier
 //            .fillMaxWidth()

@@ -39,8 +39,6 @@ fun AdminScreen(
     viewModel: ListWorkerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val listWorkerAdmin by viewModel.listWorker.collectAsState()
-    // val state = ListWorkerState()
-
 
     Scaffold(
         topBar = {
